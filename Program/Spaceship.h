@@ -10,6 +10,19 @@ using namespace std;
 
 static bool Modify = false;
 static bool EndFlag = false;
+enum OPTIONS
+{
+    ADD = 1,
+    DEL = 2,
+    SHOW = 3
+};
+
+enum SHIPTYPE
+{
+    FIGHTING = 1,   //战斗
+    TRANSPORT = 2,  //运输
+    COMMUTER = 3    //载客
+};
 
 class Spaceship;
 class TransportShip;
@@ -18,6 +31,7 @@ class CommuterShip;
 
 // 声明函数
 void OutInfo(Spaceship &ship);
+void Help();
 
 class Uncopyable
 {

@@ -7,6 +7,7 @@
 #include <string>
 #include <thread>
 #include <cstdlib>
+#include <windows.h>
 
 using namespace std;
 
@@ -41,48 +42,59 @@ bool Spaceship::connectToDB(string host, string username, string password, strin
     return true;
 }
 
+void Help()
+{
+    cout << endl
+         << "[Tabular Output of the Database]:\n"
+         << "N P : Number of Passengers\n"
+         << "D D : Degree of Damage\n"
+         << "C W : Current cargo weight"
+         << endl;
+    Sleep(2000);
+    return;
+}
+
 void OutInfo(Spaceship &ship)
 {
-    if ('Y' == cin.get() || 'y' == cin.get())
+
+    ship.connectToDB("localhost", "root", "root", "spaceship");
+
+    ship.Query("SELECT * FROM ship;"); // 查询数据
+    ship.getResult();                  // 获取查询结果
+
+    ship.outCF("id", 8);
+    ship.outCF("ship name", 8);
+    ship.outCF("ship type", 8);
+    ship.outCF("payload", 8);
+    ship.outCF("ship owner", 8);
+    ship.outCF("P N", 8);
+    ship.outCF("D D", 8);
+    ship.outCF("C W", 8);
+    cout << endl;
+
+    while (ship.whileRow()) // 遍历结果
     {
-        ship.connectToDB("localhost", "root", "root", "spaceship");
+        ship.outCF(ship.getRowi(0), 8); // id
+        ship.outCF(ship.getRowi(1), 8); // shipname
+        ship.outCF(ship.getRowi(2), 8); // shiptype
+        ship.outCF(ship.getRowi(3), 8); // payload
+        ship.outCF(ship.getRowi(4), 8); // ship owner
 
-        ship.Query("SELECT * FROM ship;"); // 查询数据
-        ship.getResult();                  // 获取查询结果
-
-        ship.outCF("id", 8);
-        ship.outCF("ship name", 8);
-        ship.outCF("ship type", 8);
-        ship.outCF("payload", 8);
-        ship.outCF("ship owner", 8);
-        ship.outCF("P N", 8);
-        ship.outCF("D D", 8);
-        ship.outCF("C W", 8);
+        ship.outCF(ship.getRowi(5), 8); // Num of Passengers
+        ship.outCF(ship.getRowi(6), 8); // Degree of Damage
+        ship.outCF(ship.getRowi(7), 8); // Current cargo weight
         cout << endl;
-
-        while (ship.whileRow()) // 遍历结果
-        {
-            ship.outCF(ship.getRowi(0), 8); // id
-            ship.outCF(ship.getRowi(1), 8); // shipname
-            ship.outCF(ship.getRowi(2), 8); // shiptype
-            ship.outCF(ship.getRowi(3), 8); // payload
-            ship.outCF(ship.getRowi(4), 8); // ship owner
-
-            ship.outCF(ship.getRowi(5), 8); // Num of Passengers
-            ship.outCF(ship.getRowi(6), 8); // Degree of Damage
-            ship.outCF(ship.getRowi(7), 8); // Current cargo weight
-            cout << endl;
-        }
-
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | 14);
-        cout << "[Attention]" << endl
-             << "N P = Number of Passengers" << endl
-             << "D D = Degree of Damage" << endl
-             << "C W = Current cargo weight" << endl
-             << endl;
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | 7); //"7"设置白色
-
-        mysql_free_result(ship.returnResult()); // 释放结果集
-        ship.closeConnection();                 // 关闭数据库连接
     }
+
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | 14);
+    cout << "[Attention]" << endl
+         << "N P = Number of Passengers" << endl
+         << "D D = Degree of Damage" << endl
+         << "C W = Current cargo weight" << endl
+         << endl;
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | 7); //"7"设置白色
+    Sleep(2000);
+
+    mysql_free_result(ship.returnResult()); // 释放结果集
+    ship.closeConnection();                 // 关闭数据库连接
 }

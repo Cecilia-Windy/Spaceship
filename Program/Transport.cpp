@@ -19,12 +19,12 @@ bool TransportShip::ThrShipLogin(bool temp)
 {
     try
     {
-        while (true)
+        while (!EndFlag)
         {
             Sleep(randNum(25.0, 1000.0) * 1000);
             string RLOAD = to_string(randNum(25.0, 1500.0)); // random payload
-            string RSNAME = randStr(randNum(3, 15));     // random ship name
-            string ROWNME = randStr(randNum(3, 15));     // random owner name
+            string RSNAME = randStr(randNum(3, 15));         // random ship name
+            string ROWNME = randStr(randNum(3, 15));         // random owner name
 
             T_ship.connectToDB("localhost", "root", "root", "spaceship");
 

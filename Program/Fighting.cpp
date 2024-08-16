@@ -19,7 +19,7 @@ bool FightingShip::ThrShipLogin(bool temp)
 {
     try
     {
-        while (true)
+        while (!EndFlag)
         {
             Sleep(randNum(25.0, 1000.0) * 1000);
             string RLOAD = to_string(randNum(25.0, 1500.0)); // random payload
