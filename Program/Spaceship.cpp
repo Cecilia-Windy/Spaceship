@@ -7,6 +7,7 @@
 #include <string>
 #include <thread>
 #include <cstdlib>
+#include <ctime>
 #include <windows.h>
 
 using namespace std;
@@ -19,9 +20,10 @@ Spaceship::~Spaceship()
 {
 }
 
-string Spaceship::randStr(const int len) // 参数为字符串的长度
+string randStr(const int len) // 参数为字符串的长度
 {
-    string str; // 声明用来保存随机字符串的str
+    string str;                       // 声明用来保存随机字符串的str
+    srand(static_cast<int>(time(0))); // 设置随机数种子
     // rand()%26是取余，余数为0~25加上'a',就是字母a~z,push_back()是string类尾插函数。这里插入随机字符
     for (int idx = 0; idx < len; idx++)
         str.push_back(('a' + rand() % 26));
@@ -44,12 +46,14 @@ bool Spaceship::connectToDB(string host, string username, string password, strin
 
 void Help()
 {
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | 12);
     cout << endl
          << "[Tabular Output of the Database]:\n"
          << "N P : Number of Passengers\n"
          << "D D : Degree of Damage\n"
          << "C W : Current cargo weight"
          << endl;
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | 7); //"7"设置白色
     Sleep(2000);
     return;
 }
@@ -67,9 +71,9 @@ void OutInfo(Spaceship &ship)
     ship.outCF("ship type", 8);
     ship.outCF("payload", 8);
     ship.outCF("ship owner", 8);
-    ship.outCF("P N", 8);
-    ship.outCF("D D", 8);
-    ship.outCF("C W", 8);
+    ship.outCF("P N [Per]", 8);
+    ship.outCF("D D [%]", 8);
+    ship.outCF("C W [T]", 8);
     cout << endl;
 
     while (ship.whileRow()) // 遍历结果

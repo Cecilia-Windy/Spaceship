@@ -25,13 +25,14 @@ bool TransportShip::ThrShipLogin(bool temp)
             string RLOAD = to_string(randNum(25.0, 1500.0)); // random payload
             string RSNAME = randStr(randNum(3, 15));         // random ship name
             string ROWNME = randStr(randNum(3, 15));         // random owner name
+            string CW = to_string((randNum(0.0, 3000.0)));       // random number of passengers
 
             T_ship.connectToDB("localhost", "root", "root", "spaceship");
 
             T_ship.Query(
                 "insert into spaceship.ship(id,shipname,shiptype,payload,sowner,c_numc,f_loss,t_load) \
 				value(default,'" +
-                RSNAME + "','Fighting','" + RLOAD + "','" + ROWNME + "',null,0.00,null);");
+                RSNAME + "','Fighting'," + RLOAD + ",'" + ROWNME + "',NULL,NULL," + CW + ");");
 
             T_ship.closeConnection();
             Modify = true;

@@ -32,6 +32,8 @@ class CommuterShip;
 // 声明函数
 void OutInfo(Spaceship &ship);
 void Help();
+template <typename AnyNum> static AnyNum randNum(AnyNum, AnyNum);
+string randStr(const int len);
 
 class Uncopyable
 {
@@ -50,9 +52,7 @@ public: // BASIC
     Spaceship();
     virtual ~Spaceship();
 
-    template <typename AnyNum> static AnyNum randNum(AnyNum, AnyNum);
-    string randStr(const int len);
-
+    
     bool connectToDB(string host, string username, string password, string database);
 
     inline MYSQL_ROW whileRow() { return row = mysql_fetch_row(result); }
@@ -99,7 +99,7 @@ private:
 };
 
 template <typename AnyNum>
-AnyNum Spaceship::randNum(AnyNum min, AnyNum max) // int or double
+AnyNum randNum(AnyNum min, AnyNum max) // int or double
 {
     if (typeid(min) == typeid(double) && typeid(max) == typeid(double))
     {
@@ -110,6 +110,7 @@ AnyNum Spaceship::randNum(AnyNum min, AnyNum max) // int or double
     }
     if (typeid(min) == typeid(int) && typeid(max) == typeid(int))
     {
+        srand(static_cast<int>(time(0))); // 设置随机数种子
         return static_cast<AnyNum>(static_cast<int>(rand()) % static_cast<int>((max - min + 1) + min));
     }
     return static_cast<AnyNum>(NULL);
