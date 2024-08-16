@@ -78,11 +78,37 @@ int main()
                 else if (tempStr == "Commuter" || tempStr == "commuter" || tempStr == "C")
                     ShipType = COMMUTER;
                 else
+                {
+                    cout << endl
+                         << "[Invalid Input]" << endl;
+                    Sleep(1000);
                     continue;
+                }
                 cout << ShipType;
                 break;
 
             case DEL:
+                cout << "[/help] Please Enter the Type of Spaceship: ";
+                cin >> tempStr;
+                if (tempStr == "/help")
+                {
+                    Help();
+                    continue;
+                }
+                else if (tempStr == "Fighting" || tempStr == "fighting" || tempStr == "F")
+                    ShipType = FIGHTING;
+                else if (tempStr == "Transport" || tempStr == "transport" || tempStr == "T")
+                    ShipType = TRANSPORT;
+                else if (tempStr == "Commuter" || tempStr == "commuter" || tempStr == "C")
+                    ShipType = COMMUTER;
+                else
+                {
+                    cout << endl
+                         << "[Invalid Input]" << endl;
+                    Sleep(1000);
+                    continue;
+                }
+                cout << ShipType;
                 break;
 
             case SHOW:

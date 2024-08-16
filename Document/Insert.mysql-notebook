@@ -30,7 +30,7 @@
                 "lineNumber": 2,
                 "column": 1
             },
-            "firstPositionDeltaTop": 37
+            "firstPositionDeltaTop": 17
         },
         "contributionsState": {
             "editor.contrib.folding": {},
@@ -53,7 +53,7 @@
                         }
                     ]
                 },
-                "currentHeight": 134,
+                "currentHeight": 28,
                 "currentSet": 1,
                 "statements": [
                     {
@@ -177,7 +177,7 @@
                 "result": {
                     "type": "resultIds",
                     "list": [
-                        "50968c5b-29ca-4df5-c12e-6e39e5157a8a"
+                        "f85ffef7-e3d8-442f-931e-a301e0a0ace2"
                     ]
                 },
                 "currentHeight": 124.109375,
@@ -196,8 +196,8 @@
             },
             "data": [
                 {
-                    "tabId": "56127a1f-8996-48b1-d055-063a63949491",
-                    "resultId": "50968c5b-29ca-4df5-c12e-6e39e5157a8a",
+                    "tabId": "c635cdf2-607e-4c9a-b1bb-f5f9988839f6",
+                    "resultId": "f85ffef7-e3d8-442f-931e-a301e0a0ace2",
                     "rows": [
                         {
                             "0": 1,
